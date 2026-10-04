@@ -1,0 +1,404 @@
+@import 'leaflet/dist/leaflet.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================================================
+ * YIELD WRAP design system. See /styleguide for a live reference of every class here.
+ * ===================================================================================== */
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-surface font-sans text-dark antialiased;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight text-dark;
+    font-feature-settings: 'cv11', 'ss01', 'ss03', 'cv05';
+  }
+  h1 {
+    letter-spacing: -0.03em;
+  }
+  h2 {
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: rgba(26, 122, 74, 0.18);
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary/50 ring-offset-2 ring-offset-white;
+  }
+  input[type='range'] {
+    accent-color: #1a7a4a;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* ---------------------------------------------------------------- Typography */
+  .font-display {
+    font-feature-settings: 'cv11', 'ss01', 'ss03', 'cv05';
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-primary;
+  }
+  .lead {
+    @apply text-base leading-relaxed text-ink-500 sm:text-lg;
+  }
+  .heading-xl {
+    @apply font-display text-3xl font-extrabold sm:text-4xl lg:text-5xl;
+    letter-spacing: -0.035em;
+  }
+  .heading-lg {
+    @apply font-display text-2xl font-extrabold sm:text-3xl;
+    letter-spacing: -0.03em;
+  }
+
+  /* ---------------------------------------------------------------- Buttons */
+  .btn {
+    @apply relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-150 focus-visible:ring-2 focus-visible:ring-offset-2 active:translate-y-px active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-sm {
+    @apply rounded-lg px-3 py-1.5 text-xs;
+  }
+  .btn-lg {
+    @apply rounded-2xl px-6 py-3.5 text-base;
+  }
+  .btn-primary {
+    @apply bg-gradient-to-b from-primary-500 to-primary-600 text-white shadow-[0_1px_2px_rgba(10,51,32,0.3),inset_0_1px_0_rgba(255,255,255,0.18)] ring-1 ring-inset ring-primary-700/60 hover:from-primary-600 hover:to-primary-700 hover:shadow-glow focus-visible:ring-primary/60 active:from-primary-700 active:to-primary-700;
+  }
+  .btn-accent {
+    @apply bg-gradient-to-b from-accent-400 to-accent-500 text-dark shadow-[0_1px_2px_rgba(138,86,12,0.3),inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-inset ring-accent-600/50 hover:to-accent-600 hover:shadow-glow-accent focus-visible:ring-accent/60;
+  }
+  .btn-danger {
+    @apply bg-gradient-to-b from-critical-400 to-critical-500 text-white shadow-[0_1px_2px_rgba(132,43,34,0.3),inset_0_1px_0_rgba(255,255,255,0.18)] ring-1 ring-inset ring-critical-600/60 hover:to-critical-600 focus-visible:ring-critical/60;
+  }
+  .btn-secondary {
+    @apply border border-ink-200 bg-white text-dark shadow-[0_1px_2px_rgba(28,40,51,0.05)] hover:border-ink-300 hover:bg-ink-50 focus-visible:ring-primary/40 active:bg-ink-100;
+  }
+  .btn-ghost {
+    @apply text-ink-600 hover:bg-ink-100 hover:text-dark focus-visible:ring-primary/40 active:bg-ink-200/70;
+  }
+  .btn-outline-primary {
+    @apply border border-primary/40 bg-white text-primary hover:border-primary/60 hover:bg-primary-50 focus-visible:ring-primary/40 active:bg-primary-100;
+  }
+  .btn-white {
+    @apply bg-white text-primary-800 shadow-soft hover:bg-primary-50 focus-visible:ring-white/70;
+  }
+  .btn-glass {
+    @apply border border-white/25 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 focus-visible:ring-white/60;
+  }
+  .btn-icon {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-xl text-ink-600 transition-colors hover:bg-ink-100 hover:text-dark focus-visible:ring-2 focus-visible:ring-primary/50 active:bg-ink-200/70;
+  }
+
+  /* ---------------------------------------------------------------- Cards & surfaces */
+  .card {
+    @apply rounded-2xl border border-ink-200/70 bg-white shadow-card;
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-0.5 hover:border-ink-200 hover:shadow-lift;
+  }
+  .card-pad {
+    @apply p-4 sm:p-6;
+  }
+  .card-title {
+    @apply text-[15px] font-semibold tracking-snug text-dark;
+  }
+  .section-title {
+    @apply text-lg font-bold tracking-snug text-dark sm:text-xl;
+  }
+  .glass {
+    @apply border border-white/20 bg-white/10 backdrop-blur-xl;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 8px 24px -8px rgba(6, 33, 20, 0.4);
+  }
+  .glass-light {
+    @apply border border-white/70 bg-white/70 backdrop-blur-xl;
+    box-shadow: 0 8px 32px -8px rgba(28, 40, 51, 0.12);
+  }
+  .hairline {
+    @apply border-ink-200/70;
+  }
+
+  /* ---------------------------------------------------------------- Forms */
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink-700;
+  }
+  .input {
+    @apply block w-full rounded-xl border border-ink-200 bg-white px-3.5 py-2.5 text-sm text-dark shadow-[0_1px_2px_rgba(28,40,51,0.04)] transition-all placeholder:text-ink-400 hover:border-ink-300 focus:border-primary-500 focus:outline-none focus:ring-4 focus:ring-primary/10 disabled:cursor-not-allowed disabled:bg-ink-50;
+  }
+  .input-error {
+    @apply border-critical hover:border-critical focus:border-critical focus:ring-critical/15;
+  }
+  .field-error {
+    @apply mt-1 text-xs font-medium text-critical;
+  }
+  .field-hint {
+    @apply mt-1 text-xs text-ink-500;
+  }
+
+  /* ---------------------------------------------------------------- Badges & chips */
+  .badge {
+    @apply inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ring-inset;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors;
+  }
+  .chip-on {
+    @apply border-primary bg-primary-50 text-primary;
+  }
+  .chip-off {
+    @apply border-ink-200 bg-white text-ink-600 hover:border-ink-300 hover:bg-ink-50;
+  }
+
+  /* ---------------------------------------------------------------- Tables */
+  .table-base {
+    @apply min-w-full divide-y divide-ink-100 text-sm;
+  }
+  .table-base th {
+    @apply whitespace-nowrap bg-ink-50/60 px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-ink-500;
+  }
+  .table-base td {
+    @apply px-4 py-3 align-middle text-ink-700;
+  }
+  .table-base tbody tr {
+    @apply transition-colors hover:bg-primary-50/40;
+  }
+
+  /* ---------------------------------------------------------------- Misc */
+  .skeleton {
+    @apply animate-shimmer rounded-lg;
+    background-color: #e9edf0;
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.65) 50%, rgba(255, 255, 255, 0) 100%);
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+  }
+  .metric {
+    @apply font-mono font-bold tabular-nums tracking-tight;
+  }
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  /* Deep green mesh for heroes / banners. */
+  .bg-hero-gradient {
+    background-color: #0a3320;
+    background-image: radial-gradient(110% 90% at 0% 0%, rgba(34, 140, 87, 0.95) 0%, transparent 55%),
+      radial-gradient(70% 80% at 100% 0%, rgba(20, 163, 139, 0.55) 0%, transparent 55%),
+      radial-gradient(80% 90% at 85% 110%, rgba(243, 156, 18, 0.18) 0%, transparent 55%),
+      linear-gradient(135deg, #0f4a2d 0%, #0a3320 100%);
+  }
+  /* Subtle radial mesh for page backgrounds. */
+  .bg-mesh {
+    background-color: #f4f6f7;
+    background-image: radial-gradient(60% 40% at 0% 0%, rgba(26, 122, 74, 0.07) 0%, transparent 70%),
+      radial-gradient(50% 35% at 100% 0%, rgba(20, 163, 139, 0.06) 0%, transparent 70%),
+      radial-gradient(50% 40% at 50% 100%, rgba(243, 156, 18, 0.04) 0%, transparent 70%);
+    background-attachment: fixed;
+  }
+  .bg-dots {
+    background-image: radial-gradient(rgba(28, 40, 51, 0.09) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+  .bg-dots-light {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+  .text-gradient {
+    background-image: linear-gradient(100deg, #1a7a4a 0%, #14a38b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-gradient-light {
+    background-image: linear-gradient(100deg, #aedfc2 0%, #f9c25b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-gradient-animated {
+    background-size: 200% 200%;
+    @apply animate-gradient-pan;
+  }
+  .ring-focus {
+    @apply outline-none ring-2 ring-primary/50 ring-offset-2 ring-offset-white;
+  }
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .pause-on-hover:hover {
+    animation-play-state: paused;
+  }
+  .stagger > * {
+    @apply animate-fade-up;
+  }
+  .stagger > *:nth-child(2) { animation-delay: 60ms; }
+  .stagger > *:nth-child(3) { animation-delay: 120ms; }
+  .stagger > *:nth-child(4) { animation-delay: 180ms; }
+  .stagger > *:nth-child(5) { animation-delay: 240ms; }
+  .stagger > *:nth-child(6) { animation-delay: 300ms; }
+}
+
+/* Leaflet: keep map panes inside their own stacking context so dropdowns and modals stay on top. */
+.yw-map {
+  isolation: isolate;
+}
+.yw-map .leaflet-container {
+  font-family: inherit;
+  background: #e8eef0;
+}
+.yw-marker {
+  background: transparent;
+  border: none;
+}
+.yw-marker-dot {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  border: 3px solid #fff;
+  box-shadow: 0 1px 4px rgba(28, 40, 51, 0.35);
+}
+.yw-marker-dot.yw-lg {
+  width: 24px;
+  height: 24px;
+}
+.yw-marker-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  background: currentColor;
+  opacity: 0.35;
+  animation: pulseRing 1.6s ease-out infinite;
+  z-index: -1;
+}
+.yw-marker-label {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  margin-top: 3px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1c2833;
+  box-shadow: 0 1px 2px rgba(28, 40, 51, 0.2);
+}
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Google Places dropdown above modals */
+.pac-container {
+  z-index: 10000 !important;
+  border-radius: 12px;
+  margin-top: 4px;
+  font-family: inherit;
+}
+
+/* ---------------------------------------------------------------- Printable sticker sheets & posters */
+.sticker-page {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4mm;
+  margin-bottom: 8mm;
+}
+.sticker-cell {
+  display: flex;
+  aspect-ratio: 1 / 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 1mm;
+  overflow: hidden;
+  border: 1px dashed #94a3b8;
+  border-radius: 9999px;
+  background: #fff;
+  padding: 9% 12% 10%;
+  text-align: center;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.poster-page {
+  min-height: 280mm;
+}
+@media (max-width: 640px) {
+  .sticker-page {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media print {
+  @page {
+    size: A4;
+    margin: 8mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .sticker-page {
+    grid-template-columns: repeat(4, 45mm);
+    grid-auto-rows: 45mm;
+    gap: 2mm 3mm;
+    justify-content: center;
+    margin: 0;
+    break-after: page;
+    page-break-after: always;
+  }
+  .sticker-page:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+  .sticker-cell {
+    aspect-ratio: auto;
+    width: 45mm;
+    height: 45mm;
+  }
+  .poster-page {
+    min-height: 0;
+    height: 280mm;
+    break-inside: avoid;
+  }
+}
